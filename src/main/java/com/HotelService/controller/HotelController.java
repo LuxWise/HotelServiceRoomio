@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/api/hotels")
+@RequestMapping("/hotels")
 @RequiredArgsConstructor
 public class HotelController {
 
     private final HotelService hotelService;
     private final RoomService roomService;
+
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Test endpoint is working");
+    }
 
     @GetMapping()
     public ResponseEntity<Object[]> getAllHotels() {

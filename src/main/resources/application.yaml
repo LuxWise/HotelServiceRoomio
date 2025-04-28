@@ -6,9 +6,9 @@ spring:
     name: hotel-service
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/hotel_service}
-    username: ${SPRING_DATASOURCE_USERNAME:user_admin}
-    password: ${SPRING_DATASOURCE_PASSWORD:user_db_pass}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://hotel-db:5432/hotel_service}
+    username: ${SPRING_DATASOURCE_USERNAME:hotel_admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:hotel_db_pass}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
