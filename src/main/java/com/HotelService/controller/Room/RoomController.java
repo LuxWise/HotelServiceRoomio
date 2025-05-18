@@ -1,5 +1,6 @@
 package com.HotelService.controller.Room;
 
+import com.HotelService.dto.Room_dto;
 import com.HotelService.model.Room.Room;
 import com.HotelService.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<Object[]> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         return ResponseEntity.ok(rooms.toArray());
@@ -31,9 +32,8 @@ public class RoomController {
         return ResponseEntity.ok(room);
     }
 
-
     @PostMapping("")
-    public ResponseEntity<RoomResponse> createRooms(@RequestBody Room room) {
+    public ResponseEntity<RoomResponse> createRooms(@RequestBody Room_dto room) {
         return  handleRequestProcess(() -> roomService.createRoom(room));
     }
 
