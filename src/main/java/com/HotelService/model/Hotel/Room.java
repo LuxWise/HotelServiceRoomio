@@ -32,6 +32,12 @@ public class Room {
     @JoinColumn(name = "hotel_id", nullable = false)
     private Hotel statusId;
 
+    @Column(name = "reserved", nullable = false)
+    private boolean reserved;
+
+    @Column(name = "reserved_id", nullable = false)
+    private UUID reservedId;
+
     @Column(name = "active", nullable = false)
     private boolean active;
 

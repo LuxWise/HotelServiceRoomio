@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HotelService {
 
-    HotelRepository hotelRepository;
+    private  final  HotelRepository hotelRepository;
 
     public List<Hotel> getAllHotels(){
         return hotelRepository.findAll();

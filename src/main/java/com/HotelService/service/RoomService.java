@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RoomService {
 
-    RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     public List<Room> getAllRooms(){
         return roomRepository.findAll();
