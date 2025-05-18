@@ -1,7 +1,7 @@
 package com.HotelService.controller;
 
 import com.HotelService.model.Hotel.Hotel;
-import com.HotelService.model.Hotel.Room;
+import com.HotelService.model.Room.Room;
 import com.HotelService.service.HotelService;
 import com.HotelService.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +23,8 @@ public class HotelController {
     private final RoomService roomService;
 
     @GetMapping("/health")
-    public ResponseEntity<String> checkHeaders(@RequestHeader(value = "X-User-ID") String user) {
-        System.out.println("✅ Header X-User-ID: " + user);
-        return ResponseEntity.ok("UserID: " + user);
+    public ResponseEntity<String> checkHeaders() {
+        return ResponseEntity.ok("Hotel Service is up and running");
     }
 
     @GetMapping()
@@ -53,8 +52,9 @@ public class HotelController {
     }
 
     @PostMapping()
-    public ResponseEntity<HotelResponse> createHotel() {
+    public ResponseEntity<HotelResponse> createHotel(@RequestBody Hotel hotel) {
         return  handleRequestProcess(() -> {
+            hotelService.createHotel(hotel);
             return HotelResponse.builder().message("Hotel created successfully").build();
         });
     }
@@ -79,7 +79,7 @@ public class HotelController {
         } catch (MessagingException e) {
             return ResponseEntity.status(500).body(HotelResponse.builder().message("Error to send email").build());
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(HotelResponse.builder().message("Internal Server Error").build());
+            return ResponseEntity.status(500).body(HotelResponse.builder().message("Internal Server Error: " + e ).build());
         }
     }
 }
