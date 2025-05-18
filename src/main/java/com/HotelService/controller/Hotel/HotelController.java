@@ -41,6 +41,10 @@ public class HotelController {
         return handleRequestProcess(() -> hotelService.createHotel(hotel));
     }
 
+    @PatchMapping("/{hotelId}")
+    public ResponseEntity<HotelResponse> modifyHotel() {
+        return handleRequestProcess(() -> HotelResponse.builder().message("Hotel modify successfully").build());
+    }
 
     private ResponseEntity<HotelResponse> handleRequestProcess(ThrowingSupplier<HotelResponse> supplier) {
         try {

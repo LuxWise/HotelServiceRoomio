@@ -15,15 +15,15 @@ import lombok.NoArgsConstructor;
 public class RoomType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    @Column(nullable = false, unique = true)
+    private String code; // Ej: SGL, DBL, STE
 
-    @Column(name = "description", nullable = false)
+    @Column(nullable = false)
+    private String name; // Ej: Single, Double, Suite
+
+    @Column(length = 1000)
     private String description;
-
-    @Column(name = "visible", nullable = false)
-    private boolean visible;
 }
