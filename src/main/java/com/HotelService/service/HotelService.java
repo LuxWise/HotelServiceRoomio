@@ -21,4 +21,8 @@ public class HotelService {
     public Hotel getHotelById(UUID id){
         return hotelRepository.findById(id).orElse(null);
     }
+
+    public Hotel createHotel(Hotel hotel){
+        return hotelRepository.save(hotel);
+    }
 }

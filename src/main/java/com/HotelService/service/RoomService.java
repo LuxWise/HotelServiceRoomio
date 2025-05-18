@@ -1,6 +1,6 @@
 package com.HotelService.service;
 
-import com.HotelService.model.Hotel.Room;
+import com.HotelService.model.Room.Room;
 import com.HotelService.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

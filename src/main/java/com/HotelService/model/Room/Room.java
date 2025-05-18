@@ -1,5 +1,6 @@
-package com.HotelService.model.Hotel;
+package com.HotelService.model.Room;
 
+import com.HotelService.model.Hotel.Hotel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
