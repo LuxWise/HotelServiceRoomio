@@ -1,9 +1,7 @@
-package com.HotelService.controller;
+package com.HotelService.controller.Hotel;
 
 import com.HotelService.model.Hotel.Hotel;
-import com.HotelService.model.Room.Room;
 import com.HotelService.service.HotelService;
-import com.HotelService.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Controller;
@@ -15,12 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/hotels")
+@RequestMapping("/hotel")
 @RequiredArgsConstructor
 public class HotelController {
 
     private final HotelService hotelService;
-    private final RoomService roomService;
 
     @GetMapping("/health")
     public ResponseEntity<String> checkHeaders() {
@@ -39,39 +36,11 @@ public class HotelController {
         return ResponseEntity.ok(hotel);
     }
 
-        @GetMapping("/rooms")
-    public ResponseEntity<Object[]> getAllRooms() {
-        List<Room> rooms = roomService.getAllRooms();
-        return ResponseEntity.ok(rooms.toArray());
-    }
-
-    @GetMapping("/rooms/{roomId}")
-    public ResponseEntity<Room> getRoomById(@PathVariable UUID roomId) {
-        Room room = roomService.getHotelById(roomId);
-        return ResponseEntity.ok(room);
-    }
-
     @PostMapping()
     public ResponseEntity<HotelResponse> createHotel(@RequestBody Hotel hotel) {
-        return  handleRequestProcess(() -> {
-            hotelService.createHotel(hotel);
-            return HotelResponse.builder().message("Hotel created successfully").build();
-        });
+        return handleRequestProcess(() -> hotelService.createHotel(hotel));
     }
 
-    @PostMapping("/rooms")
-    public ResponseEntity<HotelResponse> createRooms() {
-        return  handleRequestProcess(() -> {
-            return HotelResponse.builder().message("Room created successfully").build();
-        });
-    }
-
-    @PatchMapping("/rooms/{hotelId}")
-    public ResponseEntity<HotelResponse> modifyRooms() {
-        return handleRequestProcess(() -> {
-            return HotelResponse.builder().message("Room modify successfully").build();
-        });
-    }
 
     private ResponseEntity<HotelResponse> handleRequestProcess(ThrowingSupplier<HotelResponse> supplier) {
         try {

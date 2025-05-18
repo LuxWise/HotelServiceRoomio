@@ -45,6 +45,12 @@ public class Hotel {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "coordinates_latitude", nullable = false)
+    private String coordinatesLatitude ;
+
+    @Column(name = "coordinates_longitude", nullable = false)
+    private String coordinatesLongitude;
+
     @Column(name = "active", nullable = false)
     private boolean active;
 
