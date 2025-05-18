@@ -1,4 +1,4 @@
-package com.HotelService.controller;
+package com.HotelService.controller.Room;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class HotelResponse {
+public class RoomResponse {
     private String message;
 }

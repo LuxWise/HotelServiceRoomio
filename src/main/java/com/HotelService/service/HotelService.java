@@ -1,5 +1,6 @@
 package com.HotelService.service;
 
+import com.HotelService.controller.Hotel.HotelResponse;
 import com.HotelService.model.Hotel.Hotel;
 import com.HotelService.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,13 @@ public class HotelService {
         return hotelRepository.findById(id).orElse(null);
     }
 
-    public Hotel createHotel(Hotel hotel){
-        return hotelRepository.save(hotel);
+    public HotelResponse createHotel(Hotel hotel){
+        try{
+            hotelRepository.save(hotel);
+            return HotelResponse.builder().message("Hotel created").build();
+
+        } catch (Exception e) {
+            return HotelResponse.builder().message("Error to create request").build();
+        }
     }
 }
