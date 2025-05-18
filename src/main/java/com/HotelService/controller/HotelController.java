@@ -22,9 +22,10 @@ public class HotelController {
     private final HotelService hotelService;
     private final RoomService roomService;
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Test endpoint is working");
+    @GetMapping("/health")
+    public ResponseEntity<String> checkHeaders(@RequestHeader(value = "X-User-ID") String user) {
+        System.out.println("✅ Header X-User-ID: " + user);
+        return ResponseEntity.ok("UserID: " + user);
     }
 
     @GetMapping()
@@ -39,7 +40,7 @@ public class HotelController {
         return ResponseEntity.ok(hotel);
     }
 
-    @GetMapping("/rooms")
+        @GetMapping("/rooms")
     public ResponseEntity<Object[]> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
         return ResponseEntity.ok(rooms.toArray());
@@ -61,14 +62,14 @@ public class HotelController {
     @PostMapping("/rooms")
     public ResponseEntity<HotelResponse> createRooms() {
         return  handleRequestProcess(() -> {
-            return HotelResponse.builder().message("Hotel created successfully").build();
+            return HotelResponse.builder().message("Room created successfully").build();
         });
     }
 
     @PatchMapping("/rooms/{hotelId}")
     public ResponseEntity<HotelResponse> modifyRooms() {
         return handleRequestProcess(() -> {
-            return HotelResponse.builder().message("Room created successfully").build();
+            return HotelResponse.builder().message("Room modify successfully").build();
         });
     }
 
