@@ -32,20 +32,11 @@ public class RoomService {
     }
 
     public RoomResponse createRoom(Room_dto room){
+        RoomType roomType = roomTypeRepository.findById(room.getRoomTypeId())
+                .orElseThrow(() -> new RuntimeException("Room type not found with id"));
 
-        System.out.println(room);
-        System.out.println(room.getRoomTypeId());
-        System.out.println(room.getHotelId());
-
-
-        var room_type_id = room.getRoomTypeId();
-        var hotel_id = room.getHotelId();
-
-        RoomType roomType = roomTypeRepository.findById(room_type_id)
-                .orElseThrow(() -> new RuntimeException("Room type not found with id: " + room_type_id));
-
-        Hotel hotel = hotelRepository.findById(hotel_id)
-                .orElseThrow(() -> new RuntimeException("Hotel not found with id: " + hotel_id));
+        Hotel hotel = hotelRepository.findById(room.getHotelId())
+                .orElseThrow(() -> new RuntimeException("Hotel not found with id"));
 
         Room room_data = getRoomData(room, roomType, hotel);
 
