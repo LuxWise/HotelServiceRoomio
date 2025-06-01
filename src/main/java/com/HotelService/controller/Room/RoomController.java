@@ -4,12 +4,15 @@ import com.HotelService.dto.Room_dto;
 import com.HotelService.model.Room.Room;
 import com.HotelService.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.function.ThrowingSupplier;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +38,14 @@ public class RoomController {
     @PostMapping("")
     public ResponseEntity<RoomResponse> createRooms(@RequestBody Room_dto room) {
         return  handleRequestProcess(() -> roomService.createRoom(room));
+    }
+
+    @PostMapping(value = "update/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<RoomResponse> updateRoomImages(
+            @RequestParam("roomId") UUID roomId, @RequestParam("files") List<MultipartFile> files) {
+
+        return  handleRequestProcess(() -> roomService.createMediaRoom(roomId, files));
+
     }
 
     @PatchMapping("/{roomId}")
